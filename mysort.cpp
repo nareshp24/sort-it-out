@@ -8,63 +8,77 @@
 using namespace std;
 
 //function prototypes
-void bubbleSort(vector<int> &myVector, bool type);
-void selectionSort(vector<int> &myVector, bool type);
+void bubbleSort(int arr[], int length, bool type);
+void selectionSort(int arr[], int length,  bool type);
+void insertionSort(int arr[], int length,  bool type);
 void swap(int *_a, int *_b);
+void printVector(int arr[], int length);
 
 int main(){
 
-    vector<int> myVector;
-    int length, input, ch, flag = 0;
-
+    int length, ch;
 
         cout << "How many numbers do you wish to enter? ";
         cin >> length;
 
+    int arr[length];
+
         //Take the input values from user
         cout << "Enter " << length << " numbers" << endl;
         for(int i = 0; i < length; i++){
-            cin >> input;
-            myVector.push_back(input);
+            cin >> arr[i];
         }//End for
 
         cout << "Select the operation you want" << endl
              << "1. Bubble sort in ascending order" << endl
              << "2. Bubble sort in descending order" << endl
              << "3. Selection sort in ascending order" << endl
-             << "4. Selection sort in descending order" << endl;
+             << "4. Selection sort in descending order" << endl
+             << "5. Insertion sort in ascending order" << endl
+             << "6. Insertion sort in descending order" << endl;
 
         cin >> ch;
-            switch (ch) {
-                case 1:
-                    bubbleSort(myVector, 0);
-                    break;
+        switch (ch){
+            case 1:
+                bubbleSort(arr, length, 0);
+                cout << "After sorting" << endl;
+                printVector(arr, length);
+                break;
 
-                case 2:
-                    bubbleSort(myVector, 1);
-                    break;
+            case 2:
+                bubbleSort(arr, length, 1);
+                cout << "After sorting" << endl;
+                printVector(arr, length);
+                break;
 
-                case 3:
-                    selectionSort(myVector, 0);
-                    break;
+            case 3:
+                selectionSort(arr, length, 0);
+                cout << "After sorting" << endl;
+                printVector(arr, length);
+                break;
 
-                case 4:
-                    selectionSort(myVector, 1);
-                    break;
+            case 4:
+                selectionSort(arr, length, 1);
+                cout << "After sorting" << endl;
+                printVector(arr, length);
+                break;
 
-                default:
-                    cout << "Invalid input";
-                    flag = 1;
+            case 5:
+                insertionSort(arr, length, 0);
+                cout << "After sorting" << endl;
+                printVector(arr, length);
+                break;
+
+            case 6:
+                insertionSort(arr, length, 1);
+                cout << "After sorting" << endl;
+                printVector(arr, length);
+                break;
+
+            default:
+                cout << "Invalid input";
             }//End switch
 
-
-
-        //printing after sorting
-        if(!flag) {
-            cout << "After sorting: ";
-            for (int i = 0; i < length; i++)
-                cout << myVector[i] << " ";
-        }//End if
 
     return 0;
 }//End main()
@@ -77,27 +91,30 @@ void swap(int *_a, int *_b){
 
 }//End swap()
 
-void bubbleSort(vector<int> &myVector, bool type){
+void printVector(int arr[], int length){
+
+    for(int i = 0; i < length; i++)
+        cout << arr[i] << " ";
+}//End printVector()
+
+void bubbleSort(int arr[], int length, bool type){
     //If type == 1: sort in ascending order
     //If type == 2: sort in descending order
 
-    int length = myVector.size();
-
     for(int i = 0; i < length - 1; i++){
         for(int k = 0; k < length-i-1; k++){
-            if(type ? myVector[k] < myVector[k + 1] : myVector[k] > myVector[k + 1])
-                swap(&myVector[k], &myVector[k + 1]);
+            if(type ? arr[k] < arr[k+1] : arr[k] > arr[k+1])
+                swap(&arr[k], &arr[k+1]);
 
         }//End inner for loop k
     }//End outer for loop i
 
 }//End bubbleSort()
 
-void selectionSort(vector<int> &myVector, bool type){
+void selectionSort(int arr[], int length, bool type){
     //if type == 0: ascending order
     //if type == 1: descending order
 
-    int length = myVector.size();
     int ele_idx;
 
         //shrink boundary with every step
@@ -105,13 +122,29 @@ void selectionSort(vector<int> &myVector, bool type){
             ele_idx = i;
 
             for(int j = i+1; j < length; j++)
-                if (type ? myVector[j] > myVector[ele_idx] : myVector[j] < myVector[ele_idx])
+                if (type ? arr[j] > arr[ele_idx] : arr[j] < arr[ele_idx])
                     ele_idx = j;
 
-            swap(&myVector[ele_idx], &myVector[i]);
+            swap(&arr[ele_idx], &arr[i]);
         }//End outer for loop i
 
 }//End selectionSort()
 
 
+void insertionSort(int arr[], int length, bool type){
+
+    int key;
+
+        for(int i = 1; i < length; i++){
+            key = arr[i];
+            int j = i-1;
+
+            while(j >= 0 && (type ? arr[j] < key : arr[j] > key)) {
+                    arr[j+1] = arr[j];
+                    j--;
+            }//End while loop j
+            arr[j+1] = key;
+
+        }//End for loop i
+}//End insertionSort()
 
