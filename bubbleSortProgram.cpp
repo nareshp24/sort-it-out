@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int* bubbleSort(int arr[], int size); // function prototype
+void bubbleSort(int arr[], int size); // function prototype
 
 int main()
 {
@@ -29,20 +29,20 @@ int main()
 		cout << endl << "----------------------------" << endl;
 		
 		// function call
-		int* sorted = bubbleSort(array, ARRAY_SIZE);
+		bubbleSort(array, ARRAY_SIZE);
 		
 		// display array after sorting
 		cout << endl << "----------------------------" << endl;
 		cout << "After sorting: ";
 		for(int i = 0; i < ARRAY_SIZE; i++)
-			cout << sorted[i] << " ";
+			cout << array[i] << " ";
 		cout << endl << "----------------------------" << endl;
 
 	return 0;
 }
 
 // function definition
-int* bubbleSort(int arr[], int size)
+void bubbleSort(int arr[], int size)
 {
 	for(int i = 0; i < size-1; i++)  // outer loop to iterate over array index
 		for(int j = 0; j < size-i-1; j++)  // inner loop to iterate over array elements
@@ -52,9 +52,6 @@ int* bubbleSort(int arr[], int size)
 				int temp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = temp;
-			}
-	
-	return arr;
-		
+			}	
 }
 

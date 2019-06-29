@@ -6,7 +6,7 @@
 using namespace std;
 
 // function prototype
-int* selectionSort(int arr[], int size);
+void selectionSort(int arr[], int size);
 
 int main()
 {
@@ -16,30 +16,30 @@ int main()
 		cout << "Enter array size: " << endl;
 		cin >> ARRAY_SIZE;
 
-	int unsorted[ARRAY_SIZE] = {0};
+	int array[ARRAY_SIZE] = {0};
 		
 		// take user input for array elements
 		cout << "Enter array elements: " << endl;
 		for(int i = 0; i < ARRAY_SIZE; i++)
-			cin >> unsorted[i];
+			cin >> array[i];
 		cout << endl;
 
 		// display unsorted array
 		cout << "----------------------------" << endl;
 		cout << "Before sorting: ";
 		for(int i = 0; i < ARRAY_SIZE; i++)
-			cout << unsorted[i] << " ";
+			cout << array[i] << " ";
 		cout << endl;
 	        cout << "----------------------------" << endl;
 
-	// function call
-	int* sorted = selectionSort(unsorted, ARRAY_SIZE);
+		// function call
+		selectionSort(array, ARRAY_SIZE);
 
 		// display sorted array
 		cout << "----------------------------" << endl;
 		cout << "After sorting: ";
 		for(int i = 0; i < ARRAY_SIZE; i++)
-			cout << sorted[i] << " ";
+			cout << array[i] << " ";
 		cout << endl;
 	        cout << "----------------------------" << endl;
 
@@ -47,7 +47,7 @@ int main()
 }
 
 // function definition
-int* selectionSort(int arr[], int size)
+void selectionSort(int arr[], int size)
 {	
 	
 	for(int i = 0; i < size-1; i++)		// outer loop to iterate over array
@@ -59,11 +59,9 @@ int* selectionSort(int arr[], int size)
 				idx = j;
 		}
 		
-		// place min element at apt index
+		// place min element at apt index by swapping
 		int temp = arr[idx];
 		arr[idx] = arr[i];
 		arr[i] = temp;
 	}
-
-	return arr;
 }
